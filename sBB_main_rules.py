@@ -167,7 +167,7 @@ def spatialBB(PLFs_breakpoints_x, PLFs_breakpoints_y,
     # Starting branch-and-bound iteration
     #------------------------------------ 
 
-    # CASE DESTINCTION: Worst first approach for longest edge rule
+    # CASE DISTINCTION: Worst first approach for longest edge rule
     if rule == 'longest edge':
         t = -1
     else:
