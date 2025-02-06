@@ -1,5 +1,8 @@
 """
 Author: Sina Anheyer
+Year: 2025
+Python Version: 3.9.7
+------------------------------------------------------
 Computational Experiment:
 Comparison between the largest error branching rule and the longest edge branching rule
 Problem type: non concave knapsack
@@ -19,10 +22,6 @@ import instance_generation as ig
 import numpy as np
 import random
 import matplotlib.pyplot as plt
-import io #Necessary for suppressing print
-from contextlib import redirect_stdout #Necessary for suppressing print
-
-
 #----------------------------------
 # Parameters
 #----------------------------------
