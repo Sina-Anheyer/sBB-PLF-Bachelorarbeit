@@ -5,6 +5,8 @@ Contains the functions to generate test problems and run computations. It includ
     - getDiscontinuousNetworkPLFs (generates concave PLFs with a fixed-charge jump at 0 for the network flow problem)
     - getPLFs (generates PLFs by approximating nonconvex functions)
     - func1 - func20 and X1 - X20 (functions and their domain which are approximated by getPLFs)
+    ----------------
+    Added example function X21 for interval [-5,5] 
 """
 
 #import statements
