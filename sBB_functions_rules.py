@@ -4,6 +4,8 @@ Defines auxiliary functions used in the sBB. It includes:
     - getEnvelope (computes the lower convex envelope)
     - branch_and_bound (branches current parent node and bounds child nodes)
     - solve_node (solves the child node, is a subfunction of branch_and_bound)
+    -----------
+    added case distinction for the three different branching rules
 """
 
 import numpy as np
