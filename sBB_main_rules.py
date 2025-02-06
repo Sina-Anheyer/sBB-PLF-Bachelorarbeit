@@ -174,7 +174,7 @@ def spatialBB(PLFs_breakpoints_x, PLFs_breakpoints_y,
         t = 0
 
     while( len(nodes_lb) != 0 
-          and (global_ub - nodes_lb[t])/ abs(global_ub) > epsilon #global_ub - nodes_lb[0])/ abs(global_ub)
+          and (global_ub - nodes_lb[t])/ abs(global_ub) > epsilon 
           and time.time() - sbb_starttime < timelimit):
         
         #------------------------------------------------------
