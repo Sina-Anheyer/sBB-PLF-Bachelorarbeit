@@ -4,23 +4,18 @@ Year: 2025
 Python Version: 3.9.7
 
 This Code generates the main example using
-the code of Hübner et. al privided for their paper:
+the code of Hübner et. al provided for their paper:
 
 'Spatial branch and bound for nonconvex separable piecewise
 linear optimization'
--------------------------------
-only a few necessary changes:
--------------------------------
-added case distinction in sBB_functions for the different branching rules
+--------------------------------------------------------
+only a few necessary changes to provided implementation:
+--------------------------------------------------------
+added case distinction in sBB_functions_rules and sBB_main_rules for the different branching rules
 added case distinction for infeasible subproblems in sBB_main_rules
 added case distinction for longest edge - node selection changed to 'worst first approach' 
 selecting the node with the largest lower bound first
 this hopefully prevents the algorithm from loosing itself in the smallest lower bounds
-
-the new programs are named: 
-sBB_functions_rules
-sBB_main_rules
-
 
 sBB_functions_rules:
 In getEnvelope I had to change:
@@ -61,11 +56,9 @@ rhs = 4.2
 #which two functions form the separable PLF
 #I = [2,1]
 I = [21,21]
-#-----------------------#
-# step 1: aquire lists
-# of breakpoints and
-# function values
-#-----------------------#
+#---------------------------------------------------------#
+# step 1: aquire lists of breakpoints and function values
+#---------------------------------------------------------#
 
 [plf_breakpoints_x1,plf_breakpoints_y1] = ig.getPLFs(2,K1,I,False)
 [plf_breakpoints_x2,plf_breakpoints_y2] = ig.getPLFs(2,K2,I,False)
