@@ -1,6 +1,9 @@
 """
 Contains the main function of the sBB algorithm to solve the piecewise-linear test problems.
     - spatialBB (main sBB function for continuous problems) 
+-----
+added case distinction for infeasible subproblems
+added case distinction for longest edge branching rule 'worst first approach'
 """
 
 import numpy as np
