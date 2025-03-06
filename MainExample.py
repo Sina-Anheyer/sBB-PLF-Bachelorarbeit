@@ -4,18 +4,20 @@ Year: 2025
 Python Version: 3.9.7
 
 This Code generates the main example using
-the code of Hübner et. al provided for their paper:
+the code of Hübner et. al privided for their paper:
 
 'Spatial branch and bound for nonconvex separable piecewise
 linear optimization'
---------------------------------------------------------
-only a few necessary changes to provided implementation:
---------------------------------------------------------
-added case distinction in sBB_functions_rules and sBB_main_rules for the different branching rules
+-------------------------------
+only a few necessary changes:
+-------------------------------
+added case distinction in sBB_functions for the different branching rules
 added case distinction for infeasible subproblems in sBB_main_rules
-added case distinction for longest edge - node selection changed to 'worst first approach' 
-selecting the node with the largest lower bound first
-this hopefully prevents the algorithm from loosing itself in the smallest lower bounds
+
+the new programs are named: 
+sBB_functions_rules
+sBB_main_rules
+
 
 sBB_functions_rules:
 In getEnvelope I had to change:
@@ -56,9 +58,11 @@ rhs = 4.2
 #which two functions form the separable PLF
 #I = [2,1]
 I = [21,21]
-#---------------------------------------------------------#
-# step 1: aquire lists of breakpoints and function values
-#---------------------------------------------------------#
+#-----------------------#
+# step 1: aquire lists
+# of breakpoints and
+# function values
+#-----------------------#
 
 [plf_breakpoints_x1,plf_breakpoints_y1] = ig.getPLFs(2,K1,I,False)
 [plf_breakpoints_x2,plf_breakpoints_y2] = ig.getPLFs(2,K2,I,False)
@@ -152,23 +156,34 @@ Z2 = Z21 + Z22
 # generate the plot
 #------------------------------------#
 fig = plt.figure()
+#-----------------------------------------------------------------------#
 #first subplot K1 + incumbent solutions of the different branching rules
+#-----------------------------------------------------------------------#
 ax = fig.add_subplot(1,2,1)
 ax.tick_params(axis='both',which='major',labelsize=15)
 ax.contour(X1,Y1,Z1,25,cmap='gist_gray')
+#--------------------#
 #incumbent solutions
+#--------------------#
 ax.plot(solutionK1_largest_error[8][0],solutionK1_largest_error[8][1],marker='o',color='red',label='largest error rule')
-ax.plot(solutionK1_longest_edge[8][0],solutionK1_longest_edge[8][1],marker='o',color='blue',label='longest edge rule')
+#ax.plot(solutionK1_longest_edge[8][0],solutionK1_longest_edge[8][1],marker='o',color='blue',label='longest edge rule')
 #ax.plot(solutionK1_breakpoint[8][0],solutionK1_breakpoint[8][1],marker='o',color='green',label='breakpoint rule')
+#--------------------#
 plt.axis('square')
-plt.legend(loc = 'lower left',prop={'size':15})
-# second subplot envelope + incumbent solution
+#plt.legend(loc = 'lower left',prop={'size':15})
+#-----------------------------------------------#
+# second subplot + incumbent solutions
+#-----------------------------------------------#
 ax = fig.add_subplot(1,2,2)
 ax.tick_params(axis='both',which='major',labelsize=15)
 ax.contour(X2,Y2,Z2,25,cmap='gist_gray')
+#--------------------#
+#incumbent solutions
+#--------------------#
 ax.plot(solutionK2_largest_error[8][0],solutionK2_largest_error[8][1],marker='o',color='red',label='largest error rule')
-ax.plot(solutionK2_longest_edge[8][0],solutionK2_longest_edge[8][1],marker='o',color='blue',label='longest edge rule')
+#ax.plot(solutionK2_longest_edge[8][0],solutionK2_longest_edge[8][1],marker='o',color='blue',label='longest edge rule')
 #ax.plot(solutionK2_breakpoint[8][0],solutionK2_breakpoint[8][1],marker='o',color='green',label='breakpoint rule')
+#--------------------#
 plt.axis('square')
-plt.legend(loc = 'lower left',prop={'size':15})
+#plt.legend(loc = 'lower left',prop={'size':15})
 plt.show()

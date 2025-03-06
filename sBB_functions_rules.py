@@ -4,8 +4,6 @@ Defines auxiliary functions used in the sBB. It includes:
     - getEnvelope (computes the lower convex envelope)
     - branch_and_bound (branches current parent node and bounds child nodes)
     - solve_node (solves the child node, is a subfunction of branch_and_bound)
-    -----------
-    added case distinction for the three different branching rules
 """
 
 import numpy as np
@@ -195,24 +193,25 @@ def branch_and_bound(m,n,plf_values,env_breakpoints_x,env_breakpoints_y,
         #select index with longest edge
         edge_lengths = []
         for i in range(n):
-            edge_lengths.append(env_breakpoints_x[i][0]-env_breakpoints_x[i][-1])
+            edge_lengths.append(np.abs(env_breakpoints_x[i][-1]-env_breakpoints_x[i][0]))
         branch_index = np.argmax(np.array(edge_lengths))
         branch_point = (env_breakpoints_x[branch_index][-1]+env_breakpoints_x[branch_index][0])/2
-
+    
     if (rule == "breakpoint"):
         #select index with largest breakpoint error
         possible_branch_points = []
         for i in range(n):
             error_at_breakpoints = []
-            for j in range(len(PLFs_breakpoints_y[i])):
-                error_at_breakpoints.append(PLFs_breakpoints_y[i][j]-getPLFvalue(env_breakpoints_x[i],env_breakpoints_y[i],PLFs_breakpoints_x[i][j],0))
+            for j in range(len(PLFs_breakpoints_y[i])-2):
+                error_at_breakpoints.append(np.abs(PLFs_breakpoints_y[i][j+1]-getPLFvalue(env_breakpoints_x[i],env_breakpoints_y[i],PLFs_breakpoints_x[i][j+1],0)))
             index_candidate = np.argmax(np.array(error_at_breakpoints))
             possible_branch_points.append([index_candidate,error_at_breakpoints[index_candidate]])
         branch_index = np.argmax(np.array(possible_branch_points)[:,1])
         branch_point = PLFs_breakpoints_x[branch_index][possible_branch_points[branch_index][0]]
-    
+
     #Get posititon where to divide the old convex envelope
     pos = bisect.bisect(env_breakpoints_x[branch_index],branch_point)
+    
     
     #Get primal dual basis of parent node for warm start
     var = m.VBasis #primal optimal basis of parent node

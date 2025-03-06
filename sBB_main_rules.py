@@ -1,9 +1,6 @@
 """
 Contains the main function of the sBB algorithm to solve the piecewise-linear test problems.
     - spatialBB (main sBB function for continuous problems) 
------
-added case distinction for infeasible subproblems
-added case distinction for longest edge branching rule 'worst first approach'
 """
 
 import numpy as np
@@ -167,14 +164,9 @@ def spatialBB(PLFs_breakpoints_x, PLFs_breakpoints_y,
     # Starting branch-and-bound iteration
     #------------------------------------ 
 
-    # CASE DISTINCTION: Worst first approach for longest edge rule
-    if rule == 'longest edge':
-        t = -1
-    else:
-        t = 0
 
     while( len(nodes_lb) != 0 
-          and (global_ub - nodes_lb[t])/ abs(global_ub) > epsilon 
+          and (global_ub - nodes_lb[0])/ abs(global_ub) > epsilon #global_ub - nodes_lb[0])/ abs(global_ub)
           and time.time() - sbb_starttime < timelimit):
         
         #------------------------------------------------------
@@ -198,12 +190,10 @@ def spatialBB(PLFs_breakpoints_x, PLFs_breakpoints_y,
         #------------------------------------------------------
         # Best first search: first node of sorted list is selected
         #-------------------------------------------------------
-        #case distinction in approach since best first approach 
-        #causes longest edge rule to never terminate
-        m = nodes_model[t] #changed 0 to minus 1
-        env_breakpoints_x = nodes_envelope_x[t]
-        env_breakpoints_y = nodes_envelope_y[t]
-        plf_values = nodes_plf_values[t]
+        m = nodes_model[0]
+        env_breakpoints_x = nodes_envelope_x[0]
+        env_breakpoints_y = nodes_envelope_y[0]
+        plf_values = nodes_plf_values[0]
 
 
         #---------------------------------------------------------------------
@@ -253,11 +243,11 @@ def spatialBB(PLFs_breakpoints_x, PLFs_breakpoints_y,
                 incumbent = right_model.x[0:n] 
 
         #Removing parent node
-        nodes_lb.pop(t)
-        nodes_model.pop(t)
-        nodes_envelope_x.pop(t)
-        nodes_envelope_y.pop(t)
-        nodes_plf_values.pop(t)
+        nodes_lb.pop(0)
+        nodes_model.pop(0)
+        nodes_envelope_x.pop(0)
+        nodes_envelope_y.pop(0)
+        nodes_plf_values.pop(0)
 
         #Inserting new nodes in list of nodes
         #Case distinction if one side is infeasible
