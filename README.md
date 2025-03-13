@@ -1,8 +1,8 @@
-Beispiel in Abschnitt 4.1 für Algorithmus 1:
+Beispiel in Abschnitt 3.1 für Algorithmus 1:
 ---------------------------------------------------------
 generiert mit alg_1_example.py
 
-Kontourplot in Abschnitt 4.3.3:
+Kontourplot in Abschnitt 3.3.3:
 ---------------------------------------------------------
 generiert mit MainExample.py
 
