@@ -124,10 +124,12 @@ for i in range(1,len(B_ex)):
     ax.plot(x_point,V_ex[i][0],ms=3,color='red',marker='o')
     ax.plot(x_point,V_ex[i][2],ms=3,color='red',marker='o')
 plt.axis('square')
+ax.legend('f',fontsize ="20")
 
 # second subplot envelope 
 ax = fig.add_subplot(1,2,2)
 ax.tick_params(axis='both',which='major',labelsize=15)
-ax.plot(X,Y_env,color='red')
+ax.plot(X,Y_env,color='red',label = '$covx_{I}f$')
 plt.axis('square')
+ax.legend(fontsize ="20")
 plt.show()
